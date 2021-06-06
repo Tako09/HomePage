@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}記事一覧 | {{ block.super }}{% endblock %}
+{% block description %}一年生プログラマによる成長のための投稿をしていきます。成果物でき次第、随時更新していきます。{% endblock %}
+
+{% block content %}
+<div class="nav-scroller py-1 mb-2">
+  <nav class="nav d-flex justify-content-between">
+    {% for category in categories|dictsort:"id" %}
+      <a class="p-2 link-secondary" href="{% url 'blog:category_post' category.slug %}">{{ category.name }}</a>
+    {% endfor %}
+  </nav>
+</div>
+</div>
+<div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+  <div class="col-md-6 px-0">
+    <h1 class="display-4 font-italic">Noob Blog</h1>
+    <p class="lead my-3">
+      このブログでは主にpythonを使ったプログラムのコードなどを載せていきます。
+      基礎的なコードから、機械学習やアプリケーションなどを作成してコードを上げていきたいと思います。
+      また、英語圏のテクノロジニュースを翻訳して上げていきたいと思います。
+      初心者ですの間違いがあると思います。温かく見守っていただけると幸いです。指摘等ある場合はコメントでお願いします！
+    </p>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <main class="col-md-8">
+      <h1 class="mb-4">All Posts</h1>
+      {% include "blog/snippets/main_post_list.html" %}
+      {% include "blog/snippets/pagination_b.html" %}
+    </main>
+    <aside class="col-md-4">
+      {% include "blog/snippets/sidebar.html" %}
+    </aside>
+  </div>
+</div>
+<a name="jump"></a>
+{% endblock %}

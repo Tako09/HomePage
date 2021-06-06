@@ -1,0 +1,36 @@
+<!--tmplates/blog/snippetes/sidebar.html-->
+<!--サイドバーには、カテゴリとタグのリストを表示したいのですが、一つ問題があります。
+    オブジェクトリストのコンテキスト変数を渡していないテンプレートでは、
+    どうやってレンダリングするのかという問題です。それぞれのビューに書いてもいいのですが、あまり良い考えではありません。-->
+
+    <div class="card mb-3">
+        <div class="card-header">
+          Categories
+        </div>
+        <ul class="list-group list-group-flush">
+          {% for category in categories|dictsort:"id" %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{% url 'blog:category_post' category.slug %}" class="card-link">{{ category.name }}</a>
+            <span class="badge badge-primary badge-pill">{{ category.num_posts }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          Tags
+        </div>
+        <ul class="list-group list-group-flush">
+          {% for tag in tags|dictsortreversed:"num_posts"|slice:":10" %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{% url 'blog:tag_post' tag.slug %}" class="card-link">{{ tag.name }}</a>
+            <span class="badge badge-primary badge-pill">{{ tag.num_posts }}</span>
+          </li>
+          {% endfor %}
+<!--       </ul>
+        <div class="card-body text-center">
+          <a href="{% url 'blog:tag_list' %}" class="card-link">All Tags</a>
+        </div>
+      </div>
+    -->

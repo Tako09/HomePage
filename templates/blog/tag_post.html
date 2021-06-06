@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}{{ tag.name }}| {{ block.super }}{% endblock %}
+{% block description %}{{ tag.name }}に関する投稿です。{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+<main class="col-md-8">
+    <h1 class="mb-4"># {{ tag.name }}</h1>
+    <ul>
+        {% for post in object_list %}
+        <div class="card mb-3">
+            {% if post.image %}
+            <a href="{% url 'blog:post_detail' post.id %}">
+              <img class="card-img-top" src="{{ post.image.url }}" alt="{{ post.title }}">
+            </a>
+            {% endif %}
+            <div class="card-body">
+              {% if not post.is_public %}
+              <h5><span class="badge badge-secondary">下書き</span></h5>
+              {% endif %}
+              <a href="{% url 'blog:post_detail' post.id %}">
+                <h4 class="card-title">{{ post.title }}</h4>
+              </a>
+              <hr class="card-text">{{ post.description | safe }}</hr>
+              <p class="card-text">{{ post.published_at|date }}</p>
+              <a href="{% url 'blog:post_detail' post.id %}" class="btn btn-primary">記事を読む</a>
+            </div>
+          </div>
+        {% empty %}
+        <li>まだ投稿はありません。</li>
+        {% endfor %}
+    </ul>
+    {% include "blog/snippets/pagination_b.html" %}
+</main>
+<aside class="col-md-4">
+    {% include "blog/snippets/sidebar.html" %}
+</aside>
+    </div>
+</div>
+<a name="jump"></a>
+{% endblock %}

@@ -1,0 +1,21 @@
+<!-- templates/base/navbar.html -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4" style="color:#006633;">
+    <a style="color:#006633;" class="navbar-brand" href="/">MyBlog</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a style="color:#006633;" class="nav-link" href="{% url 'blog:index' %}">All Posts <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a style="color:#006633;" class="nav-link" href="#jump">Bottom<span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      
+        {% include "blog/snippets/search_form.html" %} 
+    </div>
+  </nav>
